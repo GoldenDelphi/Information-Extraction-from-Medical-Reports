@@ -1,0 +1,206 @@
+<html>
+  <head>
+    <title>Medical Report Analysis</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+      * {
+        font-family: "DM Sans", sans-serif;
+      }
+      body {
+        background-color: #effaf7;
+        color: #444941;
+      }
+      .container {
+        margin: auto;
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: stretch;
+        width: 50%;
+      }
+      button {
+        background-color: #5f7a61;
+        color: #effaf7;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 72px;
+        margin: 2rem 0;
+        width: 50%;
+        font-size: 0.9rem;
+      }
+      button:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+      }
+      textarea {
+        width: 100%;
+        border: none;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.075) inset;
+        display: inline-block;
+        font-size: 14px;
+        padding: 8px 12px;
+        margin: 10px;
+      }
+
+      .output_text {
+        border: none;
+        background-color: #f5fced;
+        border-radius: 8px;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.075) inset;
+        display: inline-block;
+        font-size: 14px;
+        padding: 4px 6px;
+        margin: 20px 0;
+      }
+
+      .table1 {
+        display: flex;
+        margin-top: 2rem;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .table2 {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+      }
+
+      td,
+      th {
+        padding: 0.5rem;
+        text-align: center;
+        width: 50px;
+      }
+      tr {
+        border-bottom: #444941 0.5px solid;
+      }
+      tr:last-child {
+        border-bottom: none;
+      }
+      td {
+        background-color: #f5fced;
+      }
+
+      td.form2 {
+        border-bottom: #444941 1px solid;
+      }
+
+      td:last-child {
+        border: none;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 16px;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.075) inset;
+        margin: 0.2rem;
+      }
+
+      th {
+        background: #444941;
+        color: #f9f9f9;
+      }
+      caption {
+        font-size: 0.8rem;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      th:first-of-type {
+        border-top-left-radius: 8px;
+      }
+      th:last-of-type {
+        border-top-right-radius: 8px;
+      }
+      tr:last-of-type td:first-of-type {
+        border-bottom-left-radius: 8px;
+      }
+      tr:last-of-type td:last-of-type {
+        border-bottom-right-radius: 8px;
+      }
+      .t1 th {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border-top-right-radius: 0px;
+      }
+      .t1 td {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form name="form" method="POST">
+        <h1>Medical Report Analysis</h1>
+        <textarea
+          class="input_text"
+          name="transcription"
+          id="transcription"
+          cols="100"
+          rows="15"
+          placeholder="Enter your transcription here"
+        ></textarea>
+        <button>Done</button>
+      </form>
+      <div class="output_text">{{ body|markdown }}</div>
+      {% if data == true %}
+      <div class="table1">
+        <table class="t1">
+          <tr>
+            <th>Doctor</th>
+            <td>
+              {%for i in range(0, docLength)%} {{doctors[i]}} {% if i !=
+              docLength-1 %}, {%endif%}{%endfor%}
+            </td>
+          </tr>
+        </table>
+        <table class="t1">
+          <tr>
+            <th>Location</th>
+            {%for i in range(0, locLength)%}
+            <td>{{locations[i]}}</td>
+            {%endfor%}
+          </tr>
+        </table>
+        <table class="t1">
+          <tr>
+            <th>Date</th>
+            <td>{{date}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="table2">
+        <table class="t2">
+          <tr>
+            <th>Diagnosis</th>
+          </tr>
+          {%for i in range(0, disLength)%}
+          <tr>
+            <td>{{diseases[i]}}</td>
+          </tr>
+          {%endfor%}
+        </table>
+        <table class="t2">
+          <tr>
+            <th>Dosage</th>
+          </tr>
+          {%for i in range(0, medLength)%}
+          <tr>
+            <td>{{medications[i]}}</td>
+          </tr>
+          {%endfor%}
+        </table>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
