@@ -1,5 +1,5 @@
 <h1 align="center">  Information Extraction and Retrieval from Medical and Clinical Trials/Reports </h1>
-Improved the scalability and effectiveness of the Mondrian algorithm using optimized clustering process for better k-anonymity in large datasets.
+Created a simple interface which helps extract and visualize important information like symptoms and drug dosages from unstructured clinical trials, using NLP, which can prove detrimental in life and death situations.
 
 
 ## About the Project:
